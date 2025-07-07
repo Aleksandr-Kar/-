@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 class Main {
@@ -20,13 +21,13 @@ class Main {
     static String calc(String input) throws Exception {
         input = input.trim();
         
-    
-        if (!input.matches("\d+\s*[+\-*/]\s*\d+")) {
+        // Экранирование обратного слэша
+        if (!input.matches("\\d+\\s*[+\\-*/]\\s*\\d+")) {
             throw new Exception("Неверный формат ввода");
         }
 
-        String[] parts = input.split("\s*[+\-*/]\s*");
-        String operator = input.replaceAll("[^+\-*/]", "").trim();
+        String[] parts = input.split("\\s*[+\\-*/]\\s*");
+        String operator = input.replaceAll("[^+\\-*/]", "").trim();
 
         if (parts.length != 2) {
             throw new Exception("Неверный формат ввода");
