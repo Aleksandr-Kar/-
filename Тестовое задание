@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите математическую операцию (например, 1 + 2):");
+        
+        String input = scanner.nextLine();
+        
+        try {
+            String result = calc(input);
+            System.out.println(result);
+        } catch (Exception e) {
+            System.out.println("throws Exception");
+        } finally {
+            scanner.close();
+        }
+    }
+
+    static String calc(String input) throws Exception {
+        input = input.trim();
+        
+        // Регулярное выражение для проверки корректности ввода
+        if (!input.matches("\d+\s*[+\-*/]\s*\d+")) {
+            throw new Exception("Неверный формат ввода");
+        }
+
+        String[] parts = input.split("\s*[+\-*/]\s*");
+        String operator = input.replaceAll("[^+\-*/]", "").trim();
+
+        if (parts.length != 2) {
+            throw new Exception("Неверный формат ввода");
+        }
+
+        int a = Integer.parseInt(parts[0]);
+        int b = Integer.parseInt(parts[1]);
+
+        // Проверка на диапазон входных чисел
+        if (a < 1 || a > 10 || b < 1 || b > 10) {
+            throw new Exception("Числа должны быть от 1 до 10");
+        }
+
+        int result;
+        
+        switch (operator) {
+            case "+":
+                result = a + b;
+                break;
+            case "-":
+                result = a - b;
+                break;
+            case "*":
+                result = a * b;
+                break;
+            case "/":
+                if (b == 0) {
+                    throw new Exception("Деление на ноль");
+                }
+                result = a / b;
+                break;
+            default:
+                throw new Exception("Неверный оператор");
+        }
+
+        return String.valueOf(result);
+    }
+}
