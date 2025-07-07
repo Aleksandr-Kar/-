@@ -20,7 +20,7 @@ class Main {
     static String calc(String input) throws Exception {
         input = input.trim();
         
-        // Регулярное выражение для проверки корректности ввода
+    
         if (!input.matches("\d+\s*[+\-*/]\s*\d+")) {
             throw new Exception("Неверный формат ввода");
         }
